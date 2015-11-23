@@ -27,7 +27,6 @@ import sys
 import urllib
 import json
 import datetime
-import urllib2_kerberos
 import urllib2
 import pytz
 
@@ -225,6 +224,9 @@ if __name__ == "__main__":
         print "Expecting [1] host [2] port [3] kerberos ruth (true|false) [4] range in minutes [5] number of jobs "
         sys.exit(0)
 
+    if kinit_truth:
+        import urllib2_kerberos
+
     oozie_connection = OozieConnect(host, port, kinit_truth)
     # if oozie_connection.test_connection():
     #     print "Good Connection"
@@ -235,3 +237,4 @@ if __name__ == "__main__":
         print "Couldn't connect to Oozie on %s:%s" % (host, port)
         sys.exit(1)
     sys.exit(rc)
+
